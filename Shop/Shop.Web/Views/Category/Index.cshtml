@@ -1,0 +1,26 @@
+﻿@model List<Shop.Application.DTOs.CategoryDto>
+@{
+    ViewData["Title"] = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Danh mục phụ kiện</h2>
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card text-center shadow-sm border-0" style="background-color: #FFD4D4; border-radius: 12px;">
+                    <a asp-controller="Product" asp-action="ListByCategory" asp-route-categoryId="@item.CategoryId" class="link-no-style">
+                        <img src="@item.ImageUrl" class="card-img-top p-3 product-image" alt="@item.CategoryName" style="height: 120px; object-fit: contain;">
+                        <div class="card-body p-2">
+                            <h6 class="card-title">@item.CategoryName</h6>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

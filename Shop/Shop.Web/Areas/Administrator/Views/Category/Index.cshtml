@@ -1,0 +1,37 @@
+﻿@model List<Shop.Application.DTOs.CategoryDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Danh sách loại sản phẩm</h5>
+
+            <!-- Default Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên loại sản phẩm</th>
+                        <th scope="col">Mô tả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CategoryId</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,47 @@
+﻿@model Shop.Infrastructure.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Sửa sản phẩm";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">Sửa sản phẩm</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="mb-3">
+        <label asp-for="ProductName" class="form-label"></label>
+        <input asp-for="ProductName" class="form-control" />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Danh mục</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"))" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label">Link ảnh</label>
+        <input asp-for="ImageUrl" class="form-control" />
+    </div>
+
+    <div class="form-check mb-3">
+        <input type="checkbox" asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Hiển thị</label>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

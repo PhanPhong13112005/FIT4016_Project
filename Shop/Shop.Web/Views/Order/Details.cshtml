@@ -1,0 +1,41 @@
+﻿@model Shop.Application.DTOs.OrderDto
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h3 class="mb-3">Chi tiết đơn hàng #@Model.OrderId</h3>
+    <p><strong>Ngày đặt:</strong> @Model.OrderDate?.ToString("dd/MM/yyyy")</p>
+    <p><strong>Tổng tiền:</strong> <span class="text-danger">@Model.TotalAmount?.ToString("N0") VNĐ</span></p>
+
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice?.ToString("N0")</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        @{
+                            var total = (item.UnitPrice ?? 0) * (item.Quantity ?? 0);
+                        }
+                        @total.ToString("N0")
+                    </td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

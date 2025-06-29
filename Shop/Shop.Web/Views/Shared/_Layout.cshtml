@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+    var role = HttpContextAccessor.HttpContext.Session.GetString("Role"); // Khai báo biến role ở đây
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Shop.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Shop.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Phụ Kiện Điện Thoại</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Danh Mục Phụ Kiện</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Product" asp-action="AllProduct">Danh sách sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart"></i> Giỏ Hàng
+                            </a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(userId))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Order" asp-action="OrderDetails">Đơn hàng của bạn</a>
+                            </li>
+                        }
+                        @* Thêm menu dành cho admin *@
+                        @if (!string.IsNullOrEmpty(role) && role.ToLower() == "admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-danger fw-bold" href="/Administrator/Category/Index">👑 Sang trang Admin</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (!string.IsNullOrEmpty(userId))
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="nav-link text-primary">
+                                    👋 Xin chào, @userName!
+                                    @if (!string.IsNullOrEmpty(role))
+                                    {
+                                        <span class="badge bg-@(role.ToLower() == "admin" ? "danger" : "secondary") ms-2">@role</span>
+                                    }
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" asp-controller="Auth" asp-action="Logout">Đăng xuất</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Đăng nhập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register">Đăng ký</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - Shop.Web - <a asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

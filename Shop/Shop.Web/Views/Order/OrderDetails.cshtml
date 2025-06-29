@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Shop.Application.DTOs.OrderDto>
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết đơn hàng</h2>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã đơn</th>
+            <th>Tên hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>
+                    @if (order.Items != null && order.Items.Any())
+                    {
+                        @string.Join(", ", order.Items.Select(i => i.ProductName))
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có sản phẩm</span>
+                    }
+                </td>
+                <td>@order.OrderDate?.ToString("dd/MM/yyyy")</td>
+                <td>@order.TotalAmount?.ToString("N0") VNĐ</td>
+                <td>@order.Status</td>
+                <td>
+                    <a asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-info btn-sm">Chi tiết</a>
+                    @if (order.Status != "Đã hủy")
+                    {
+                        <a asp-controller="Order" asp-action="Cancel" asp-route-orderId="@order.OrderId"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">Hủy đơn hàng</a>
+
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

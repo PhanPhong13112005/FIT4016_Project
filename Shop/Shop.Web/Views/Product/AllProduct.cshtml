@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Shop.Application.DTOs.ProductDto>
+@{
+    ViewData["Title"] = "Tất cả sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="mb-4">Danh sách sản phẩm</h3>
+
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId">
+                    <img src="@item.ImageUrl"
+                         class="card-img-top product-image"
+                         style="width: 100%; height: 200px; object-fit: contain; object-position: center; display: block; background: #f8f8f8;" />
+
+
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName</h5>
+                    <p class="text-muted">@item.Description</p>
+                    <p class="text-danger fw-bold">@item.Price?.ToString("N0") VNĐ</p>
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-outline-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

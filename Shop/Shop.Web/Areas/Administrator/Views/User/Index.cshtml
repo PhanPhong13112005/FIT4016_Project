@@ -1,0 +1,45 @@
+﻿@model List<Shop.Infrastructure.User>
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Vai trò</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.FullName</td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                <td>@(u.IsActive == true ? "Hoạt động" : "Đã khóa")</td>
+                <td>
+                    <form asp-area="Administrator" asp-controller="User" asp-action="ToggleLock"
+                          asp-route-id="@u.UserId" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-sm @(u.IsActive == true ? "btn-warning" : "btn-success")"
+                                onclick="return confirm('Bạn có chắc muốn @(u.IsActive == true ? "khóa" : "mở") tài khoản này?')">
+                            @(u.IsActive == true ? "Khóa" : "Mở")
+                        </button>
+                    </form>
+                    <a asp-area="Administrator" asp-controller="User" asp-action="Edit" asp-route-id="@u.UserId" class="btn btn-sm btn-primary">Sửa</a>
+                    <a asp-area="Administrator" asp-controller="User" asp-action="Delete" asp-route-id="@u.UserId" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa người dùng này?')"> Xoá</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+﻿@model Shop.Web.Models.RegisterModel
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <h3 class="text-center mb-4">Đăng ký tài khoản</h3>
+
+    <form asp-action="Register" method="post">
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label">Họ tên</label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Mật khẩu</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger" />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Đăng ký</button>
+
+        <div class="text-center mt-3">
+            <a asp-action="Login">Đã có tài khoản? Đăng nhập</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

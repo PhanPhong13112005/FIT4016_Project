@@ -1,0 +1,92 @@
+﻿@model List<Shop.Infrastructure.Product>
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">📦 Danh sách sản phẩm</h2>
+<div class="mb-3 text-end"> <a asp-action="Create" class="btn btn-success"> ➕ Thêm sản phẩm </a> </div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <select name="categoryId" class="form-select">
+            <option value="">-- Loại sản phẩm --</option>
+            @foreach (var c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="status" class="form-select">
+            <option value="">-- Trạng thái --</option>
+            <option value="true">Hiển thị</option>
+            <option value="false">Ẩn</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <input name="minPrice" class="form-control" placeholder="Giá từ">
+    </div>
+    <div class="col-md-2">
+        <input name="maxPrice" class="form-control" placeholder="Giá đến">
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">Lọc</button>
+        <a asp-action="Index" class="btn btn-secondary">Xóa lọc</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên</th>
+            <th>Loại</th>
+            <th>Giá</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            var mainImage = p.ProductImages?.FirstOrDefault(i => i.IsMain == true);
+            <tr>
+                <td>
+                    @if (mainImage != null)
+                    {
+                        <img src="@mainImage.ImageUrl" alt="@p.ProductName" width="80" class="img-thumbnail" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có ảnh</span>
+                    }
+                </td>
+                <td>@p.ProductName</td>
+                <td>@p.Category?.CategoryName</td>
+                <td>@(p.Price.HasValue ? p.Price.Value.ToString("N0") + " VNĐ" : "N/A")</td>
+                <td>
+                    @if (p.IsActive == true)
+                    {
+                        <span class="badge bg-success">Hiển thị</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Ẩn</span>
+                    }
+                </td>
+                <td>@p.CreatedAt?.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-primary">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@p.ProductId" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">Xóa sản phẩm</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

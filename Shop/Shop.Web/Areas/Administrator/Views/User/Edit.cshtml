@@ -1,0 +1,45 @@
+﻿@model Shop.Infrastructure.User
+@{
+    ViewData["Title"] = "Chỉnh sửa người dùng";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">✏️ Chỉnh sửa người dùng</h2>
+
+<form asp-action="Edit" method="post" class="col-md-6">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">Họ tên</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Role" class="form-label">Vai trò</label>
+        <select asp-for="Role" class="form-select">
+            <option value="user" selected="@((Model.Role ?? "").ToLower() == "user")">user</option>
+            <option value="admin" selected="@((Model.Role ?? "").ToLower() == "admin")">admin</option>
+        </select>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label class="form-check-label" asp-for="IsActive">Kích hoạt (Hoạt động)</label>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">💾 Lưu</button>
+        <a asp-action="Index" class="btn btn-secondary">← Trở lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,4 @@
+D:\Học\CNTT17_03\Shop\Shop\Shop.Web\wwwroot\assets\img\card.jpg
+D:\Học\CNTT17_03\Shop\Shop\Shop.Web\wwwroot\assets\img\messages-3.jpg
+D:\Học\CNTT17_03\Shop\Shop\Shop.Web\wwwroot\assets\img\not-found.svg
+D:\Học\CNTT17_03\Shop\Shop\Shop.Web\wwwroot\assets\img\profile-img.jpg
