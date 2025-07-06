@@ -63,6 +63,7 @@ public partial class ShopDbContext : DbContext
             entity.Property(e => e.OrderDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.ShippingMethod).HasMaxLength(100);
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .HasDefaultValue("Đang xử lý");

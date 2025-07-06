@@ -10,6 +10,8 @@ namespace Shop.Application.DTOs
         public DateTime? OrderDate { get; set; }
         public decimal? TotalAmount { get; set; }
         public string? Status { get; set; }
+        public string? ShippingMethod { get; set; }
+        public string? ShipAddress { get; set; }
         public List<OrderDetailDto> Items { get; set; } = new();
     }
 }

@@ -10,7 +10,8 @@ namespace Shop.Application.Interfaces
         Task<List<CartItemDto>> GetCartItemsAsync(int userId);
         Task RemoveFromCartAsync(int cartItemId);
 
-        // ① Trả về OrderId vừa tạo
-        Task<int> CheckoutAsync(int userId);
+        // ② Lấy danh sách sản phẩm trong giỏ hàng
+        Task<int> CheckoutAsync(int userId, string shipAddress, string shippingMethod, string paymentMethod);
+
     }
 }

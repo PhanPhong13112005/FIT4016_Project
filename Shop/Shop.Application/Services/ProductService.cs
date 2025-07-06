@@ -27,7 +27,8 @@ namespace Shop.Application.Services
                 Description = c.Description,
                 ProductId = c.ProductId,
                 Price = c.Price,
-                ImageUrl = c.ImageUrl
+                ImageUrl = c.ImageUrl,
+                TotalSold = c.OrderDetails?.Sum(od => od.Quantity) ?? 0
             }).ToList();//Mapping thủ công
         }
 

@@ -2,6 +2,7 @@
 using Shop.Application.Interfaces;
 using System.Threading.Tasks;
 using System.Linq;
+using Shop.Web.Models;
 
 namespace Shop.Web.Controllers
 {
@@ -54,25 +55,44 @@ namespace Shop.Web.Controllers
         }
 
         // Thanh toán giỏ hàng và chuyển đến trang thành công
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Checkout()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
+            if (userId == null) return RedirectToAction("Login", "Auth");
 
-            var items = await _cartService.GetCartItemsAsync(userId.Value);
-            if (!items.Any())
-            {
-                TempData["Message"] = "Giỏ hàng của bạn đang trống.";
-                return RedirectToAction(nameof(Index));
-            }
+            var cartItems = await _cartService.GetCartItemsAsync(userId.Value);
+            if (!cartItems.Any()) return RedirectToAction(nameof(Index));
 
-            int orderId = await _cartService.CheckoutAsync(userId.Value);
+            var model = new CartCheckoutViewModel
+            {
+                CartItems = cartItems
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartCheckoutViewModel model)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null) return RedirectToAction("Login", "Auth");
+
+            var cartItems = await _cartService.GetCartItemsAsync(userId.Value);
+            if (!cartItems.Any()) return RedirectToAction(nameof(Index));
+
+            // ✅ Gọi đúng hàm Checkout với 4 tham số
+            int orderId = await _cartService.CheckoutAsync(
+                userId.Value,
+                model.ShipAddress,
+                model.ShippingMethod,
+                model.PaymentMethod
+            );
+
             return RedirectToAction(nameof(CheckoutSuccess), new { orderId });
         }
+
+
+
 
         // Hiển thị trang thanh toán thành công
         public async Task<IActionResult> CheckoutSuccess(int orderId)

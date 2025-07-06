@@ -45,6 +45,8 @@ namespace Shop.Application.Services
                 OrderDate = order.OrderDate,
                 TotalAmount = order.TotalAmount,
                 Status = order.Status,
+                ShipAddress = order.ShipAddress,
+                ShippingMethod = order.ShippingMethod,
                 Items = orderDetails
                     .Where(d => d.OrderId == order.OrderId)
                     .Select(d => new OrderDetailDto
@@ -52,7 +54,7 @@ namespace Shop.Application.Services
                         OrderDetailId = d.OrderDetailId,
                         ProductId = d.ProductId,
                         Quantity = d.Quantity,
-                        UnitPrice = d.UnitPrice,
+                        UnitPrice = d.UnitPrice,              
                         ProductName = products.FirstOrDefault(p => p.ProductId == d.ProductId)?.ProductName,
                         Status = order.Status
                     }).ToList()
@@ -73,6 +75,8 @@ namespace Shop.Application.Services
                 OrderDate = order.OrderDate,
                 TotalAmount = order.TotalAmount,
                 Status = order.Status,
+                ShipAddress = order.ShipAddress,
+                ShippingMethod = order.ShippingMethod,
                 Items = orderDetails
                     .Where(d => d.OrderId == order.OrderId)
                     .Select(d => new OrderDetailDto
@@ -93,6 +97,8 @@ namespace Shop.Application.Services
             order.Status = orderDto.Status;
             order.TotalAmount = orderDto.TotalAmount;
             order.OrderDate = orderDto.OrderDate;
+            order.ShipAddress = orderDto.ShipAddress;
+            order.ShippingMethod = orderDto.ShippingMethod;
             _orderRepo.Update(order);
             // Cập nhật chi tiết đơn hàng
             foreach (var item in orderDto.Items)
@@ -119,7 +125,9 @@ namespace Shop.Application.Services
                 OrderId = order.OrderId,
                 OrderDate = order.OrderDate,
                 Status = order.Status,
-                TotalAmount = order.TotalAmount,       
+                TotalAmount = order.TotalAmount,
+                ShipAddress = order.ShipAddress,
+                ShippingMethod = order.ShippingMethod,
                 Items = orderDetails
                     .Where(d => d.OrderId == order.OrderId)
                     .Select(d => new OrderDetailDto

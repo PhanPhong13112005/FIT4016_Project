@@ -1,5 +1,6 @@
 wwwroot\assets\css\style.css
 wwwroot\assets\img\apple-touch-icon.png
+wwwroot\assets\img\baseus.webp
 wwwroot\assets\img\favicon.png
 wwwroot\assets\img\logo.png
 wwwroot\assets\img\product-1.webp

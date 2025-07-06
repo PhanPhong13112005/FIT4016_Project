@@ -15,17 +15,23 @@ namespace Shop.Application.Services
         private readonly IRepository<Product> _productRepo;
         private readonly IRepository<Order> _orderRepo;
         private readonly IRepository<OrderDetail> _orderDetailRepo;
+        private readonly IRepository<Payment> _paymentRepo;
+
 
         public CartService(
             IRepository<CartItem> cartRepo,
             IRepository<Product> productRepo,
             IRepository<Order> orderRepo,
-            IRepository<OrderDetail> orderDetailRepo)
+            IRepository<OrderDetail> orderDetailRepo,
+            IRepository<Payment> paymentRepo    
+            )
+
         {
             _cartRepo = cartRepo;
             _productRepo = productRepo;
             _orderRepo = orderRepo;
             _orderDetailRepo = orderDetailRepo;
+            _paymentRepo = paymentRepo;
         }
 
         public async Task AddToCartAsync(int userId, int productId, int quantity)
@@ -81,41 +87,70 @@ namespace Shop.Application.Services
             }
         }
 
-        public async Task<int> CheckoutAsync(int userId)
+        public async Task<int> CheckoutAsync(int userId, string shipAddress, string shippingMethod, string paymentMethod)
         {
-            var cartItems = (await _cartRepo.GetAllAsync()).Where(c => c.UserId == userId).ToList();
+            var cartItems = (await _cartRepo.GetAllAsync())
+                .Where(c => c.UserId == userId).ToList();
+
             if (!cartItems.Any()) return -1;
 
             var products = await _productRepo.GetAllAsync();
             var productDict = products.ToDictionary(p => p.ProductId);
 
-            decimal total = cartItems.Sum(ci => ci.Quantity * (productDict.ContainsKey(ci.ProductId) ? productDict[ci.ProductId].Price ?? 0 : 0));
+            decimal total = cartItems.Sum(ci =>
+                ci.Quantity * (productDict.ContainsKey(ci.ProductId) ? productDict[ci.ProductId].Price ?? 0 : 0));
 
+            // Tạo đơn hàng
             var order = new Order
             {
                 UserId = userId,
                 OrderDate = DateTime.Now,
                 TotalAmount = total,
+                ShipAddress = shipAddress,
                 Status = "Đang xử lý"
             };
             await _orderRepo.AddAsync(order);
             await _orderRepo.SaveChangesAsync();
 
+            // Chi tiết đơn hàng
             foreach (var ci in cartItems)
             {
+                if (!productDict.ContainsKey(ci.ProductId)) continue;
+
                 await _orderDetailRepo.AddAsync(new OrderDetail
                 {
                     OrderId = order.OrderId,
                     ProductId = ci.ProductId,
                     Quantity = ci.Quantity,
-                    UnitPrice = productDict.ContainsKey(ci.ProductId) ? productDict[ci.ProductId].Price ?? 0 : 0
+                    UnitPrice = productDict[ci.ProductId].Price ?? 0
                 });
+
+                // Xóa khỏi giỏ hàng
                 _cartRepo.Delete(ci);
             }
+
             await _orderDetailRepo.SaveChangesAsync();
             await _cartRepo.SaveChangesAsync();
 
+            // Thêm thông tin thanh toán
+            var payment = new Payment
+            {
+                OrderId = order.OrderId,
+                PaymentDate = DateTime.Now,
+                Amount = total,
+                PaymentMethod = paymentMethod
+            };
+
+            if (_paymentRepo == null)
+                throw new NullReferenceException("_paymentRepo chưa được inject vào CartService.");
+
+            await _paymentRepo.AddAsync(payment);
+            await _paymentRepo.SaveChangesAsync();
+
             return order.OrderId;
         }
+
+
+
     }
 }

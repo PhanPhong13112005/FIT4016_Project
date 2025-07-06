@@ -1,0 +1,27 @@
+﻿@model Shop.Web.Models.CartCheckoutViewModel
+
+<form asp-action="Checkout" method="post">
+    <div class="mb-3">
+        <label asp-for="ShipAddress" class="form-label"></label>
+        <input asp-for="ShipAddress" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ShippingMethod" class="form-label"></label>
+        <select asp-for="ShippingMethod" class="form-select" required>
+            <option value="Hỏa tốc">Hỏa tốc</option>
+            <option value="Nhanh">Nhanh</option>
+            <option value="Tiết kiệm">Tiết kiệm</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PaymentMethod" class="form-label"></label>
+        <select asp-for="PaymentMethod" class="form-select" required>
+            <option value="Tiền mặt khi nhận hàng">Tiền mặt khi nhận hàng</option>
+            <option value="Chuyển khoản">Chuyển khoản</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Xác nhận đặt hàng</button>
+</form>

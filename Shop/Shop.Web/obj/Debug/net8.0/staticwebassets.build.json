@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "42jSqQxqknKa7TXlLmoybtXaYz41Sz2JUsjolyVGT6U=",
+  "Hash": "7SIXZLJMnr53gdV1ZdK7ORjApmtpICtR87BW1LiguZo=",
   "Source": "Shop.Web",
   "BasePath": "_content/Shop.Web",
   "Mode": "Default",
@@ -99,6 +99,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\apple-touch-icon.png"
+    },
+    {
+      "Identity": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\assets\\img\\baseus.webp",
+      "SourceId": "Shop.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\",
+      "BasePath": "_content/Shop.Web",
+      "RelativePath": "assets/img/baseus#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7a3aiht0he",
+      "Integrity": "4cpIQyGHQpT/++GGIeWOX5IEctSUaADEO/mqlkipKOk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\baseus.webp"
     },
     {
       "Identity": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\assets\\img\\favicon.png",
@@ -10594,8 +10615,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "5luxuqnmgv",
-      "Integrity": "GY9tyXpF0DULtLFA6X7I1aRA9ZO/1ibPdZUjSH1TIdI=",
+      "Fingerprint": "4xsitk5n6o",
+      "Integrity": "GIAdURsmcAHuvaL+v0xfqlfX4YtNoAIzTBbENNOWndc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -12149,6 +12170,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-SHg1AuK/JO72u/PLMXCiKpu0561aLr+LxnIgjNkezCE="
+        }
+      ]
+    },
+    {
+      "Route": "assets/img/baseus.7a3aiht0he.webp",
+      "AssetFile": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\assets\\img\\baseus.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10738"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4cpIQyGHQpT/++GGIeWOX5IEctSUaADEO/mqlkipKOk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 06 Jul 2025 13:54:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7a3aiht0he"
+        },
+        {
+          "Name": "label",
+          "Value": "assets/img/baseus.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4cpIQyGHQpT/++GGIeWOX5IEctSUaADEO/mqlkipKOk="
+        }
+      ]
+    },
+    {
+      "Route": "assets/img/baseus.webp",
+      "AssetFile": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\assets\\img\\baseus.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10738"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4cpIQyGHQpT/++GGIeWOX5IEctSUaADEO/mqlkipKOk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 06 Jul 2025 13:54:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4cpIQyGHQpT/++GGIeWOX5IEctSUaADEO/mqlkipKOk="
         }
       ]
     },
@@ -53071,7 +53174,7 @@
       ]
     },
     {
-      "Route": "css/site.5luxuqnmgv.css",
+      "Route": "css/site.4xsitk5n6o.css",
       "AssetFile": "D:\\Học\\CNTT17_03\\Shop\\Shop\\Shop.Web\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -53081,7 +53184,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1143"
+          "Value": "1984"
         },
         {
           "Name": "Content-Type",
@@ -53089,11 +53192,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GY9tyXpF0DULtLFA6X7I1aRA9ZO/1ibPdZUjSH1TIdI=\""
+          "Value": "\"GIAdURsmcAHuvaL+v0xfqlfX4YtNoAIzTBbENNOWndc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 26 Jun 2025 19:38:29 GMT"
+          "Value": "Sun, 06 Jul 2025 14:11:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -53103,7 +53206,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "5luxuqnmgv"
+          "Value": "4xsitk5n6o"
         },
         {
           "Name": "label",
@@ -53111,7 +53214,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-GY9tyXpF0DULtLFA6X7I1aRA9ZO/1ibPdZUjSH1TIdI="
+          "Value": "sha256-GIAdURsmcAHuvaL+v0xfqlfX4YtNoAIzTBbENNOWndc="
         }
       ]
     },
@@ -53126,7 +53229,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1143"
+          "Value": "1984"
         },
         {
           "Name": "Content-Type",
@@ -53134,11 +53237,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GY9tyXpF0DULtLFA6X7I1aRA9ZO/1ibPdZUjSH1TIdI=\""
+          "Value": "\"GIAdURsmcAHuvaL+v0xfqlfX4YtNoAIzTBbENNOWndc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 26 Jun 2025 19:38:29 GMT"
+          "Value": "Sun, 06 Jul 2025 14:11:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -53148,7 +53251,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GY9tyXpF0DULtLFA6X7I1aRA9ZO/1ibPdZUjSH1TIdI="
+          "Value": "sha256-GIAdURsmcAHuvaL+v0xfqlfX4YtNoAIzTBbENNOWndc="
         }
       ]
     },

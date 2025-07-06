@@ -25,8 +25,11 @@ namespace Shop.Application.DTOs
         public string? ImageUrl { get; set; }
 
         public virtual Category? Category { get; set; }
+        public int TotalSold { get; set; }
 
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
 
         public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
 
